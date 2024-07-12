@@ -1,7 +1,14 @@
 import cv2
-import numpy as np 
+import os
 
 face_classifier = cv2.CascadeClassifier("C:/opencv/haarcascade/haarcascade_frontalface_default.xml")
+
+datasets = "C:/Users/Risha/OneDrive/Desktop/rishabh/opencv project/dataset/"
+sub_dataset = 'Cristiano ronaldo'
+
+path = os.path.join(datasets, sub_dataset)
+if not os.path.isdir(path):
+    os.mkdir(path)
 
 def face_extractor(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -28,7 +35,7 @@ try:
                 face = cv2.resize(face, (200, 200))
                 face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
                 
-                file_name_path = 'C:/Users/Risha/OneDrive/Desktop/RISHABH all files/opencv project/dataset/' + str(count) + '.jpg'
+                file_name_path = os.path.join(path, sub_dataset + '_' + str(count) + '.jpg')
                 cv2.imwrite(file_name_path, face)
                 
                 cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
